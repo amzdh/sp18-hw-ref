@@ -13,7 +13,17 @@ class Node(object):
         self.next_node = next_node
 
 
+
 def list_length(head):
+    if head == None:
+        return 0
+    count = 1
+    current = head
+    while current.next_node != None:
+            count += 1
+            current = current.next_node
+    return count
+
     """
     Given a linked list, returns the length ofthe linked list.
     Suppose the existing linked list looks like this: 3 -> 5 -> 9 -> 6
@@ -29,6 +39,7 @@ def list_length(head):
 
 
 def add_head(head, data):
+    return Node(data, head)
     """
     Prepends a new Node to a linked list. You are given the head
     of the linked list and the data for the new Node.
@@ -50,6 +61,11 @@ def add_head(head, data):
 
 
 def add_tail(head, data):
+    tail = head
+    while tail.next_node != None:
+        tail = tail.next_node
+    Node(tail, data)
+    return head
     """
     Appends a new Node to a linked list. You are given the head of
     the linked list and the data for the new Node.
@@ -71,6 +87,12 @@ def add_tail(head, data):
 
 
 def remove_position(head, position):
+    count = 0
+    while count != position:
+        while head.next_node != None:
+            count += 1
+
+
     """
     Given the head of a linked list, removes the element of the 
     specified position. If the position is greater than the length
