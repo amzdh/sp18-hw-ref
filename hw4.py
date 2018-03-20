@@ -61,10 +61,12 @@ def add_head(head, data):
 
 
 def add_tail(head, data):
+    if head == None:
+        return Node(data, None)
     tail = head
     while tail.next_node != None:
         tail = tail.next_node
-    Node(tail, data)
+    tail.next_node = Node(data, None)
     return head
     """
     Appends a new Node to a linked list. You are given the head of
@@ -87,10 +89,20 @@ def add_tail(head, data):
 
 
 def remove_position(head, position):
+    len = list_length(head)
+    if position >= len:
+        return head
+    if position < 0:
+        return head
+    if position == 0:
+        return head.next_node
+    current = head
     count = 0
-    while count != position:
-        while head.next_node != None:
-            count += 1
+    while count + 1 != position:
+        current = current.next_node
+        count += 1
+    current.next_node = current.next_node.next_node
+    return head
 
 
     """
@@ -109,6 +121,19 @@ def remove_position(head, position):
 
 
 def find_cycle(head):
+    i = head
+    j = head
+    while True:
+        if i.next_node == None:
+            return False
+        if i.next_node.next_node == None or j.next_node == None:
+            return False
+        if i.next_node == j.next_node.next_node:
+            return True
+        i = i.next_node.next_node
+        j = j.next_node
+        if i == j:
+            return Ture
     """
     Given the head of a linked list, determines whether or not there
     is a cycle in the linked list.
